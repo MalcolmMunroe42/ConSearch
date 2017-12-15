@@ -2,18 +2,52 @@
 <html>
 <head>
 	<title>Consearch HomePage</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
 </head>
 <body>
-	<form class="form-horizontal">
+  <!--Jumbotron-->
+ <div class="container">
+  <div class="jumbotron">
+    <h1 style = "font-family: Lucida Console;">ConSearch</h1> 
+    
+  <!--Style sheet for various elements-->
+    <style>
+  body{
+    background-color: #191970;
+  }
+   
+    .jumbotron{
+      background-image: url(http://www.phishrivieramaya.com/wp-content/uploads/aerial.jpg);
+      background-position: 0% 15%;
+      color: #FF8C00;
+ }
+    h1 {
+      text-align: center;
+      font-size: 300%;
+  }
+    legend{
+      text-align: center;
+    }
+    .form-group{
+      text-align: center;
+    }
+    </style>
+
+  </div>
+</div>
+
+<!--search form-->
+ <form class="form-horizontal">
 <fieldset>
 
 <!-- Form Name -->
-<legend>Search Artist or Event</legend>
+<legend style="color: white;">Search Artist or Event</legend>
 
 <!-- Text input-->
 <div class="form-group" style="padding-right: 25%;">
-  <label class="col-md-4 control-label" for="textinput">Event type</label>  
+  <label class="col-md-4 control-label" for="textinput" style="color: white;">Event type</label>  
   <div class="col-md-8">
   <input id="textinput" name="textinput" type="text" placeholder="Search for music artist or event" class="form-control input-md">
   
@@ -22,7 +56,7 @@
 
 <!-- Text input-->
 <div class="form-group" style="padding-right: 25%;">
-  <label class="col-md-4 control-label" for="textinput">Location</label>  
+  <label class="col-md-4 control-label" for="textinput" style="color: white;">Location</label>  
   <div class="col-md-8">
   <input id="textinput" name="textinput" type="text" placeholder="Enter a location" class="form-control input-md"> 
   </div>
@@ -38,6 +72,10 @@
 
 </fieldset>
 </form>
+ <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 
 </body>
 </html>
