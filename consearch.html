@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>	
+
+	<form>
+		<input type="text" value="killers" id="field">
+		<button type="submit" id="enter"> Search!</button>
+	</form>
+
+	<p id="yeet"></p>
+	
+
+	
+
+	<script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+
+	<script>
+
+
+		$("#enter").on("click",function(event){
+			event.preventDefault();
+			var focus = $("#field").val();
+			var url = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=a5upVMn0jR69IVVxnz7eNimthI2Jugow&keyword=" + focus;
+
+			$.ajax({type:"GET", url: url, async:true, dataType: "json"}).done(function(response){
+				
+
+				var info = JSON.stringify(response._embedded);
+				
+
+				console.log(info);
+			    //$("#yeet").text(info);
+
+
+			});
+
+
+
+
+
+		});
+
+		
+
+
+
+
+	</script>
+</body>
+</html>
