@@ -9,6 +9,10 @@ $(document).ready(function() {
     $("#singlebutton").on("click", function(event) {
 
         $(".event").remove();
+<<<<<<< HEAD
+=======
+        $("#badSearch").remove();
+>>>>>>> 69ba396cd1f12346e083719b09009bd60c4ea093
 
         event.preventDefault();
         console.log("hello")
@@ -24,8 +28,12 @@ $(document).ready(function() {
         var locali = "&city=" + $("#location").val();
         var local = locali;
 
+<<<<<<< HEAD
         //get the desired number of events to display
         var numOfEvents = "&size=" + 2; //$("#events").val();
+=======
+        
+>>>>>>> 69ba396cd1f12346e083719b09009bd60c4ea093
 
         //holds the number by it self for later use
         var num = $("#events").val();
@@ -33,6 +41,11 @@ $(document).ready(function() {
         //get the radius from the city which the user is willing to travel
         var radi = "&radius=" + $("#radius").val();
 
+<<<<<<< HEAD
+=======
+        console.log(radi);
+
+>>>>>>> 69ba396cd1f12346e083719b09009bd60c4ea093
         //the range of dates the user wants to search for events
         var sDate = moment($("#sdate").val()).format();
         var startDate = "&startDateTime=" + sDate;
@@ -40,6 +53,7 @@ $(document).ready(function() {
 
 
         // smash it all together
+<<<<<<< HEAD
         var url = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=a5upVMn0jR69IVVxnz7eNimthI2Jugow" + focus; //+ local;
         console.log(url);
 
@@ -49,6 +63,22 @@ $(document).ready(function() {
 
         };
 
+=======
+        var url = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=a5upVMn0jR69IVVxnz7eNimthI2Jugow" + focus + local + "&size=5";
+       
+
+
+        if($("#radius").val() != "-"){
+            url += radi;
+        };
+
+        if ($("#sdate").val() != "") {
+
+            url += startDate;
+
+        };
+         console.log(url);
+>>>>>>> 69ba396cd1f12346e083719b09009bd60c4ea093
 
         $.ajax({
             type: "GET",
@@ -60,6 +90,14 @@ $(document).ready(function() {
             success: function(response) {
                 if (response._embedded == undefined) {
                     console.log("Sorry There are no Events with Your Preferences");
+<<<<<<< HEAD
+=======
+                    var newDiv = $("<div id='badSearch'>");
+                    $("#results").append(newDiv);
+                    var holder = $("<br><h2 class='errorMessage'>Sorry There Are No Events with Your Preferences</h2><h3 class='errorMessage'>You Can Try Again After Changing Some Stuff Around</h3>");
+                    $("#badSearch").append(holder);
+
+>>>>>>> 69ba396cd1f12346e083719b09009bd60c4ea093
                 } else {
 
                     var info = JSON.stringify(response._embedded.events[0].name);
@@ -117,6 +155,13 @@ $(document).ready(function() {
                         var table_body_id = "table_body_id" + i;
                         var table_row_id = "row" + i;
 
+<<<<<<< HEAD
+=======
+                        
+
+                        
+
+>>>>>>> 69ba396cd1f12346e083719b09009bd60c4ea093
                         $('#results').append("<div id=" + event_id + " class=event>");
                         $('#' + event_id).append("<table id=" + table_id + ">");
                         $('#' + table_id).append("<tbody id=" + table_body_id + ">");
@@ -124,7 +169,11 @@ $(document).ready(function() {
 
 
                         $('#' + table_row_id).append("<td><img src=" + image + " width=100 height=100></td>");
+<<<<<<< HEAD
                         $('#' + table_row_id).append("<td><a href=" + tickets + "><div>" + title + "</div></a><div>" + venue + "</div><div>" + when + "</div><div>" + time + "</div></td>");
+=======
+                        $('#' + table_row_id).append("<td class='textInfo'><a href=" + tickets + "><div>" + title + "</div></a><div>" + venue + "</div><div>" + when + "</div><div>" + time + "</div></td>");
+>>>>>>> 69ba396cd1f12346e083719b09009bd60c4ea093
                         // $('#' + table_row_id).append("<td>"+venue+"</td>");
                         //$('#' + table_row_id).append("<td>"+when+"</td>");
                         //$('#' + table_row_id).append("<td>"+time+"</td>");
