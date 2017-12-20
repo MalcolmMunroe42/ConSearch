@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+</head>
+<body>	
+
+	<form>
+		 <label class="col-form-label" for="band">Event/Artist </label>
+		<input type="text" id="band">
+
+		
+		
+		
+
+		<br>
+		<label class="col-form-label" for="location">Where are you?: </label>
+		<input type="text" id="location">
+
+		<br>
+		<label class="col-form-label" for="radius">How far are you willing to travel?</label>
+		<input type="text" id="radius">
+
+		<br>
+		<label class="col-form-label" for="events">Number of events: </label>
+		<input type="text" id="events">
+
+		<br>
+		<label class="col-form-label" for="sdate">Start Date:</label>
+		<input type="text" id="sdate">
+
+		<br>
+		<button type="submit" id="enter"> Search!</button>
+	</form>
+
+	<table>
+		<tbody id="yeet">
+			
+		</tbody>
+	</table>
+	
+
+	
+
+	<script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+	<script   src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"   integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="   crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+
+	<script>
+
+		//This is the jqueryUI Api to allow a interactive date picker
+		$(function() {
+		    $("#sdate").datepicker();
+		});
+//when the search button is clicked....
+		$("#enter").on("click",function(event){
+			event.preventDefault();
+
+//pull the event name and remove any spaces to avoid errors
+			var input = "&keyword=" + $("#band").val();
+			var focus = input.replace(/\s/g, '');
+
+//pull the city from the input remove spaces
+			var locali = "&city=" + $("#location").val();
+			var local = locali.replace(/\s/g, '');
+
+//get the desired number of events to display
+			//var numOfEvents = "&size=" + $("#events").val();
+
+		//holds the number by it self for later use
+			//var num = $("#events").val();
+
+//get the radius from the city which the user is willing to travel
+			var radi = "&radius=" + $("#radius").val();
+
+//the range of dates the user wants to search for events
+			var sDate = moment($("#sdate").val()).format();
+			var startDate = "&startDateTime=" + sDate;
+
+			// var eDate = moment($("#edate").val()).format();
+			// var sendDate = "&endDateTime=" + eDate;
+
+
+// smash it all together
+			var url = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=a5upVMn0jR69IVVxnz7eNimthI2Jugow" + focus + local;
+			
+			if($("#sdate").val() != ""){
+
+				url += startDate
+
+			};
+
+			// if($("#edate").val() != ""){
+
+			// 	url += startDate
+
+			// };
+
+				console.log(url);
+			
+
+			
+
+
+
+			$.ajax({type:"GET", url: url, async:true, dataType: "json",
+
+				success: function(response){
+					if(response._embedded == undefined){
+						console.log("Sorry There are no Events with Your Preferences");
+					}else{
+						var info = JSON.stringify(response._embedded.events[0].name);
+						
+						console.log(response._embedded.events);
+						console.log(info);
+
+						//make the table to display the events
+
+						//for(i=0;i<5;i++){
+							//creates an easier way to access the event
+							var event = response._embedded.events[0];
+
+							//the name of the event
+							var title = event.name;
+							console.log(title);
+
+							//the date and time of the event
+							var when = event.dates.start.localDate;
+							console.log(when);
+
+							var time = event.dates.start.localTime;
+							console.log(time);
+
+
+							//link dirrectly to the tickets
+							var tickets = event.url;
+							console.log(tickets);
+
+
+							var image = event.images[1].url;
+							console.log(image);
+
+
+							//venue
+							var venue = event._embedded.venues[0].name;
+							console.log(venue);
+
+
+					
+							//create the actual row
+							var tableR = $("<tr>");
+
+							var img = $("<img>").attr("src",image);
+					//first collum	
+
+							//create the col for the name and the picture
+							var tableC1 = $("<td>").attr("class","nameCol");
+							//put the title and a break to place the picture below it
+							tableC1.append(`${title} <br>`);
+							tableC1.append(img);
+
+							//place the title col into the row
+							tableR.append(tableC1);
+					
+					//second collum
+							//create the col
+							var tableC2 = $("<td>").attr("class","infoCol");
+
+							//format the time to a readable one
+							time = moment(time, 'HH:mm:ss').format('LT')
+
+							//put the venue and the start date/time into the collum
+							tableC2.append(`${venue} <br> Performing on: ${when} <br> At: ${time}`);
+
+							//push it to the row!
+							tableR.append(tableC2);
+
+					//third collum
+							//create col for link to tickets
+
+							var tableC2 = $("<td>").attr("class","linkCol");
+
+
+
+							$("#yeet").append(tableR);
+
+
+
+
+
+						//}
+					}
+				},
+
+				error: function(response){
+					console.log("nope didnt work");
+				}
+				
+		});
+
+
+
+
+		});
+
+		
+
+
+
+
+	</script>
+</body>
+</html>
